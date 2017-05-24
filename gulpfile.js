@@ -100,10 +100,12 @@ gulp.task('serve', function() {
       index: "index.html"
     }
   });
-  //function to watch for changes in the *js files
+  //Task to watch for changes in the *js files
   gulp.watch(['js/*.js'], ['jsBuild']);
-  //function to watch for changes in bower.json and browser reloads with bowerBuild task
+  //Task to watch for changes in bower.json and browser reloads with bowerBuild task
   gulp.watch(['bower.json'], ['bowerBuild']);
+  //Task to watch the HTML files
+  gulp.watch(['*.html'], ['htmlBuild']);
 
 });
 
@@ -114,5 +116,10 @@ gulp.task('jsBuild', ['jsBrowserify', 'jshint'], function() {
 
 //bowerBuild task
 gulp.task('bowerBuild', ['bower'], function(){
+  browserSync.reload();
+});
+
+//HTML build task
+gulp.task('htmlBuild', function() {
   browserSync.reload();
 });
